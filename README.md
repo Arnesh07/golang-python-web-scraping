@@ -27,4 +27,4 @@ Sequential code that uses BeautifulSoup for scraping.
 Parallel code that uses BeautifulSoup for scraping and uses Python's ThreadPoolExecutor for managing worker threads.
 
 ## Results
-
+![Time Execution Comparison](results.jpeg)
