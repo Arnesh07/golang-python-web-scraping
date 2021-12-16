@@ -33,7 +33,7 @@ def get_session():
         thread_local.session = requests.Session()
     return thread_local.session
 
-
+# function to fetch single quote and parse data
 def fetch_quote(ticker):
     session = get_session()
     headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'}
@@ -52,6 +52,7 @@ def fetch_quote(ticker):
         ticker["quote_price"] = float(quote_price.text)
         print(quote_price.text)
 
+# function that creates a thread pool executor
 def fetch_quotes(tickers):
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         results = executor.map(fetch_quote, tickers)
@@ -65,9 +66,11 @@ start_time = time.time()
 # Read csv file to obtain ticker information
 tickers = read_csv("../nasdaq_screener_1635280898552.csv")
 tickers = tickers[:tickers_to_be_scraped]
-# print(tickers[1800])
 fetch_quotes(tickers)
 count = 0
+
+# For loop to check the number of tickers for which the data has been
+# successfully scraped
 for ticker in tickers:
     if "quote_price" in ticker:
         count += 1

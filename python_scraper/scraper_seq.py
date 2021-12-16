@@ -29,6 +29,7 @@ tickers = read_csv("../nasdaq_screener_1635280898552.csv")
 
 count = 0
 
+# For loop to fetch every ticker data.
 for ticker in tickers:
     count += 1
     URL = "https://finance.yahoo.com/quote/" + str(ticker["symbol"])

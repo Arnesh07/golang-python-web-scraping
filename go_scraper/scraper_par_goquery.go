@@ -49,7 +49,6 @@ func readCsvFile(filePath string) map[string]Ticker {
 	defer f.Close()
 
 	csvReader := csv.NewReader(f)
-	// tickers := make(map[string]Ticker)
 	for {
 		record, err := csvReader.Read()
 		if err == io.EOF {
@@ -68,7 +67,6 @@ func readCsvFile(filePath string) map[string]Ticker {
 		tickerSymbols = append(tickerSymbols, record[0])
 		tickers[record[0]] = ticker
 	}
-	// records, err := csvReader.ReadAll()
 	if err != nil {
 		log.Fatal("Unable to parse file as CSV for "+filePath, err)
 	}
@@ -108,6 +106,7 @@ func fetchQuotePrice(URL string) {
 		return
 	}
 
+	// parse the required div HTML element
 	doc.Find("#quote-header-info").Each(func(i int, s *goquery.Selection) {
 		// For each item found, get the title
 		name := s.Find("h1").Text()

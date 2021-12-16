@@ -61,6 +61,7 @@ func main() {
 
 	c := colly.NewCollector()
 
+	// parses the particular division that matches ID
 	c.OnHTML("#quote-header-info", func(e *colly.HTMLElement) {
 		name := e.ChildText("h1")
 		quote := e.ChildTexts("span")
